@@ -1,9 +1,7 @@
 require 'sinatra'
-require 'sinatra/reloader'
-
+# require 'sinatra/reloader' if development?
 SECRET_NUM = rand(100)
 @@turn = 5
-
 get '/' do
   guess = params['guess']
   cheat = params['cheat']
@@ -42,3 +40,4 @@ def check_guess(guess)
     else return ["You got it right!", '#ADFF2F']
   end
 end
+
