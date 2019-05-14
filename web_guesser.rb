@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra/reloader' if development?
+require 'sinatra/reloader'
 
 SECRET_NUM = rand(100)
 @@turn = 5
