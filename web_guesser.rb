@@ -2,12 +2,27 @@ require 'sinatra'
 require 'sinatra/reloader'
 
 SECRET_NUM = rand(100)
+@@turn = 5
 
 get '/' do
-  number = SECRET_NUM
   guess = params['guess']
+  cheat = params['cheat']
+  if cheat
+    cheat_mode = true
+  end
   message, background = check_guess(guess)
-  erb :index, :locals => {:number => number, :message => message, :background => background}
+  # erb :index, :locals => {:number => SECRET_NUM, :message => message, :background => background, :turn => @@turn}
+  if params['guess'] != nil
+    @@turn -= 1
+    if @@turn == 0 || message == "You got it right!"
+      if message != "You got it right!"
+        message = "YOU LOSE! The number has changed!"
+      end
+      @@turn = 5
+      SECRET_NUM = rand(100)
+    end
+  end
+  erb :index, :locals => {:cheat_mode => cheat_mode, :number => SECRET_NUM, :message => message, :background => background, :turn => @@turn}
 end
 
 def check_guess(guess)

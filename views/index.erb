@@ -7,13 +7,16 @@
     </style>
   </head>
   <body>
+    <p><%= turn %> guesses left</p>
     <form>
       <input type='text' name='guess' />
       <input type='submit' value='Guess!' />
     </form>
     <%= message %>
-    <p>
-      The SECRET NUMBER is <%= number %>
-    </p>
+    <% if cheat_mode %>
+      <p>
+        The SECRET NUMBER is <%= number %>
+      </p>
+    <% end %>
   </body>
 </html>
